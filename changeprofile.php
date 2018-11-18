@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 session_start();
-include 'connection.php';
+include ("connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@ include 'connection.php';
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                <i class="icon-reorder shaded"></i></a><a class="brand" href="/">Six&Kaz </a>
+                <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html">Six&Kaz </a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
 
 
@@ -60,14 +60,13 @@ include 'connection.php';
     <div class="container">
         <div class="row">
             <div class="span3">
-
                 <?php
                 if ($_SESSION['userid']) {
                     $invalid_id = $_SESSION['userid'];
                     $user_group = $_SESSION['user_group'];
                     if ($user_group == 2) {
-                        $query = mysqli_query($link,"SELECT * from mentors WHERE invalid_id = '$invalid_id'");
-                        while ($row = mysqli_fetch_array($query)) {
+                        $query = mysql_query("SELECT * from mentors WHERE invalid_id = '$invalid_id'");
+                        while ($row = mysql_fetch_array($query)) {
                             $mentor_id = $row['mentor_id'];
                         }
                         echo "
@@ -124,49 +123,64 @@ include 'connection.php';
                 }
 
                 ?>
-
                 <!--/.sidebar-->
             </div>
-            <!--/.span3-->
-            <div class="span9">
-                <div class="content">
-                    <div class="btn-controls">
-                        <div class="btn-box-row row-fluid">
-                            <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
-                                <p class="text-muted">
-                                    Текущий проект</p>
-                            </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
-                                <p class="text-muted">
-                                    Мои заказы</p>
-                            </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
-                                <p class="text-muted">
-                                    Заработано</p>
-                            </a>
-                        </div>
-                        <div class="btn-box-row row-fluid">
-                            <div class="span8">
-                                <div class="row-fluid">
-                                    <div class="span12">
-                                        <a href="#" class="btn-box small span4"><i class="icon-envelope"></i><b>Сообщения</b>
-                                        </a><a href="#" class="btn-box small span4"><i class="icon-group"></i><b>Люди</b>
-                                        </a><a href="#" class="btn-box small span4"><i class="icon-exchange"></i><b>Курсы</b>
-                                        </a>
-                                    </div>
+                    <!--/.span3-->
+                    <div class="span9">
+                        <div class="content">
+                            <div class="module message">
+                                <div class="module-head">
                                 </div>
-                                <div class="row-fluid">
-                                    <div class="span12">
-                                        <a href="#" class="btn-box small span4"><i class="icon-save"></i><b>Выполненные проекты</b>
-                                        </a><a href="#" class="btn-box small span4"><i class="icon-bullhorn"></i><b>Наставник</b>
-                                        </a><a href="#" class="btn-box small span4"><i class="icon-sort-down"></i><b>Рейтинг</b> </a>
-                                    </div>
+                                <div class="module-body">
+                                    <form class="form-vertical" action="" id="reg">
+                                        <div class="module-head">
+                                            <h3>Изменить данные</h3>
+                                        </div>
+                                        <div class="module-body">
+                                            <div class="control-group">
+                                                <div class="controls row-fluid">
+                                                    <input class="span12" type="password" id="inputPassword1" name="password" placeholder="Пароль" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls row-fluid">
+                                                    <input class="span12" type="password" id="inputPassword2" name="repeatpassword" placeholder="Повторите пароль" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls row-fluid">
+                                                    <input class="span12" type="text" id="inputPassword3" name="surname" placeholder="Фамилия" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls row-fluid">
+                                                    <input class="span12" type="text" id="inputPassword4" name="name" placeholder="Имя" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls row-fluid">
+                                                    <input class="span12" type="text" id="inputPassword5" name="patronymic" placeholder="Отчество" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls row-fluid">
+                                                    <input class="span12" type="email" id="inputPassword6" name="email" placeholder="email" required>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="module-foot">
+                                            <div class="control-group">
+                                                <div class="controls clearfix">
+                                                    <button type="submit"  class="btn btn-primary pull-right">Изменить данные</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="module-foot">
                                 </div>
                             </div>
-
-
-                            <!--/.module-->
-
-
-                            <!--/.module-->
                         </div>
                         <!--/.content-->
                     </div>
@@ -184,10 +198,4 @@ include 'connection.php';
         <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
         <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
         <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
-        <script src="scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
-        <script src="scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
-        <script src="scripts/common.js" type="text/javascript"></script>
-
-</body>
-
+    </body>
